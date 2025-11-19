@@ -125,17 +125,17 @@ local ppath = find_plugin_package_path(plugin)
 -- Exit if plugin is no found
 if not ppath then
   return
-  -- else
-  --   wezterm.log_info("[WS] ppath = " .. ppath)
+else
+  wezterm.log_info("[WS] ppath = " .. ppath)
 end
 
 -- Get plugin's parent directory (used to access other non Lua files that belongs to this plugin)
 local ppath_parent = string.gsub(ppath, "%?%.lua$", "")
--- wezterm.log_info("[WS] ppath_parent = " .. ppath_parent)
+wezterm.log_info("[WS] ppath_parent = " .. ppath_parent)
 
 -- Update package.path (This ensures files mentioned in require() can be located)
 package.path = package.path .. ";" .. ppath
--- wezterm.log_info("[WS] package.path = " .. package.path)
+wezterm.log_info("[WS] package.path = " .. package.path)
 
 
 function M.apply_to_config(config, opts)
