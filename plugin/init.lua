@@ -126,27 +126,37 @@ local ppath = find_plugin_package_path(plugin)
 -- Exit if plugin is no found
 if not ppath then
   return
-else
-  wezterm.log_info("[WS] ppath = " .. ppath)
+  -- else
+  --   wezterm.log_info("[WS] ppath = " .. ppath)
 end
 
 -- Get plugin's parent directory (used to access other non Lua files that belongs to this plugin)
 local ppath_parent = string.gsub(ppath, "%?%.lua$", "")
-wezterm.log_info("[WS] ppath_parent = " .. ppath_parent)
+-- wezterm.log_info("[WS] ppath_parent = " .. ppath_parent)
 
 -- Update package.path (This ensures files mentioned in require() can be located)
 package.path = package.path .. ";" .. ppath
-wezterm.log_info("[WS] package.path = " .. package.path)
+-- wezterm.log_info("[WS] package.path = " .. package.path)
 
-
+---@param config unknown
+---@param opts {
+---ws_mods: string?,
+---ws_quarter_screens_key: string?,
+---ws_half_screens_key: string?,
+---ws_three_quarter_screens_key: string?,
+---ws_all_screens_key: string?,
+---ws_three_quarter_right_screens_key: string?,
+---ws_half_right_screens_key: string?,
+---ws_quarter_right_screens_key: string?}
+-- Module funtion to apply to config
 function M.apply_to_config(config, opts)
   -- ws is abreviation for window_span
-  local ws_mods = opts.ws_quarter_screens_mods or "LEADER"
+  local ws_mods = opts.ws_mods or "LEADER"
   local ws_quarter_screens_key = opts.ws_quarter_screens_key or "1"
   local ws_half_screens_key = opts.ws_half_screens_key or "2"
   local ws_three_quarter_screens_key = opts.ws_three_quarter_screens_key or "3"
   local ws_all_screens_key = opts.ws_all_screens_key or "4"
-  local ws_three_quarter_right_screens_key = opts.ws_three_quarter_screens_key or "5"
+  local ws_three_quarter_right_screens_key = opts.ws_three_quarter_right_screens_key or "5"
   local ws_half_right_screens_key = opts.ws_half_right_screens_key or "6"
   local ws_quarter_right_screens_key = opts.ws_quarter_right_screens_key or "7"
 
