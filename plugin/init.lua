@@ -58,6 +58,7 @@ local function validate_git_repository(repo)
     --   return nil
     -- end
     wezterm.log_info("[WS] Valid remote repository: " .. repo)
+    return true
   else
     -- Check for file:// protocol
     if string.sub(repo, 1, 7) == "file://" then
