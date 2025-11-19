@@ -39,24 +39,25 @@ local function validate_git_repository(repo)
       wezterm.log_error("[WS] Error: URL does not contain 'github.com'.")
       return nil
     end
-    -- Exclude inaccessible or invalid remote git repository
-    local cmd = "git ls-remote -h " .. path
-    local handle = io.popen(cmd)
-    if handle then
-      local result = handle:read("*a")
-      handle:close()
-      if result and string.len(result) > 0 then
-        -- Valid remote repository
-        wezterm.log_info("[WS] Valid remote repository: " .. repo)
-        return true
-      else
-        wezterm.log_error("[WS] Error: Remote repository is inaccessible or invalid: " .. repo)
-        return nil
-      end
-    else
-      wezterm.log_error("[WS] Error: Failed to execute git command for: " .. repo)
-      return nil
-    end
+    -- -- Exclude inaccessible or invalid remote git repository
+    -- local cmd = "git ls-remote -h " .. path
+    -- local handle = io.popen(cmd)
+    -- if handle then
+    --   local result = handle:read("*a")
+    --   handle:close()
+    --   if result and string.len(result) > 0 then
+    --     -- Valid remote repository
+    --     wezterm.log_info("[WS] Valid remote repository: " .. repo)
+    --     return true
+    --   else
+    --     wezterm.log_error("[WS] Error: Remote repository is inaccessible or invalid: " .. repo)
+    --     return nil
+    --   end
+    -- else
+    --   wezterm.log_error("[WS] Error: Failed to execute git command for: " .. repo)
+    --   return nil
+    -- end
+    wezterm.log_info("[WS] Valid remote repository: " .. repo)
   else
     -- Check for file:// protocol
     if string.sub(repo, 1, 7) == "file://" then
